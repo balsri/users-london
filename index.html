@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <script>
+            function loadLondonUsers() {
+                const city = 'London';
+                fetch(`http://localhost:5000/users/${city}`).then(function(response) {
+                    return response.json();
+                }).then(function(data) {
+                    console.log('data => ', data);
+                    var londonUsers = data;
+                    var londonUsersHtml = `<h4>The following users are either listed as living in London, 
+                        or whose current coordinates are within 50 miles of London</h4><ul><li>`
+                       londonUsers.forEach((element, index) => {
+                            if(element.hasOwnProperty('first_name')){
+                            londonUsersHtml = londonUsersHtml + element.first_name
+                                            + ', ' + element.last_name + '</li>';
+                            if (index !== londonUsers.length - 1) {
+                                londonUsersHtml += '<li>';
+                            }
+                        }
+                    });
+                    londonUsersHtml = londonUsersHtml + '</ul>';
+                    document.getElementById('londonUsers').innerHTML = londonUsersHtml;
+                }).catch(function(error) {
+                    console.log("Error Occurred:", error);
+                });
+            }
+        </script>
+    </head>
+    <body>
+        <div>
+            <h3> Welcome to DWP </h3>
+        </div>
+        <button onclick="loadLondonUsers()"> Click here to load london users </button>
+        <div id="londonUsers">
+
+        </div>
+    </body>
+</html>
