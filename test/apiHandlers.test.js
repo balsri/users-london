@@ -51,10 +51,10 @@ describe('Api Handlers getAllUsers', () => {
         getSpy.mockReturnValue({ status:200, data: [{id:'1', city: 'London'}, 
                                 {id:'2', city: 'Newcastle'}]});
         // Act
-        const londonUsers = await getAllUsers();
+        const allUsers = await getAllUsers();
         
         // Assert
-        expect(londonUsers).toStrictEqual([{id:'1', city: 'London'}, 
+        expect(allUsers).toStrictEqual([{id:'1', city: 'London'}, 
                                   {id:'2', city: 'Newcastle'}]);
     });
 
@@ -62,19 +62,19 @@ describe('Api Handlers getAllUsers', () => {
         // Arrange
         getSpy.mockReturnValue({ status:500 });
         // Act
-        const londonUsers = await getAllUsers();   
+        const allUsers = await getAllUsers();   
         
         // Assert
-        expect(londonUsers).toStrictEqual([]);
+        expect(allUsers).toStrictEqual([]);
     });
 
     it('should handle error during api call', async () => {
         // Arrange
         getSpy.mockRejectedValue(new Error("network error"))
         // Act
-        const londonUsers = await getAllUsers();
+        const allUsers = await getAllUsers();
 
         // Assert
-        expect(londonUsers).toStrictEqual([]);
+        expect(allUsers).toStrictEqual([]);
     });
 });
