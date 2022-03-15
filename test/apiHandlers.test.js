@@ -46,12 +46,12 @@ describe('Api Handlers getLondonUsers', () => {
 });
 
 describe('Api Handlers getAllUsers', () => {
-    it('should return the London Users for status 200', async () => {
+    it('should return all Users for status 200', async () => {
         // Arrange
         getSpy.mockReturnValue({ status:200, data: [{id:'1', city: 'London'}, 
                                 {id:'2', city: 'Newcastle'}]});
         // Act
-        const londonUsers = await getAllUsers('London');
+        const londonUsers = await getAllUsers();
         
         // Assert
         expect(londonUsers).toStrictEqual([{id:'1', city: 'London'}, 
@@ -62,7 +62,7 @@ describe('Api Handlers getAllUsers', () => {
         // Arrange
         getSpy.mockReturnValue({ status:500 });
         // Act
-        const londonUsers = await getAllUsers('Italy');   
+        const londonUsers = await getAllUsers();   
         
         // Assert
         expect(londonUsers).toStrictEqual([]);
@@ -72,7 +72,7 @@ describe('Api Handlers getAllUsers', () => {
         // Arrange
         getSpy.mockRejectedValue(new Error("network error"))
         // Act
-        const londonUsers = await getAllUsers('London');
+        const londonUsers = await getAllUsers();
 
         // Assert
         expect(londonUsers).toStrictEqual([]);
