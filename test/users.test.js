@@ -16,11 +16,13 @@ describe('Test the root path ', () => {
   });
 
   it('GET London Users based on london city users and users living 50 miles around london', async () => {
+    // Arrange
     getAllUsers.mockReturnValue(allUsers);
     getCityUsers.mockReturnValue(cityUsers);
-
+    // Act
     const response = await request(router).get('/London');
 
+    // Assert
     expect(response.statusCode).toBe(200);
     expect(response._body).toStrictEqual(allLondonUsers);   
   });
@@ -30,11 +32,13 @@ describe('Test the root path ', () => {
     const allUsers = [];
     const cityUsers = [];
 
+    // Arrange
     getAllUsers.mockReturnValue(allUsers);
     getCityUsers.mockReturnValue(cityUsers);
-
+    // Act
     const response = await request(router).get('/London');
 
+    // Assert
     expect(response.statusCode).toBe(200);
     expect(response._body).toStrictEqual([]);   
   });
